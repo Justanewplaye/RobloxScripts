@@ -9,10 +9,10 @@ local MyHumanoid = MyCharacter:FindFirstChild("Humanoid")
 local Mouse = LocalPlayer:GetMouse()
 local MyView = Area.CurrentCamera
 local MyTeamColor = LocalPlayer.TeamColor
-local HoldingQ = false
+local HoldingE = false
 local Active = false
 local Lock = false
-local Epitaph = .187 ---Note: The Bigger The Number, The More Prediction.
+local Epitaph = 2 ---Note: The Bigger The Number, The More Prediction.
 local HeadOffset = Vector3.new(0, .1, 0)
 
 _G.TeamCheck = false
@@ -40,7 +40,7 @@ local function CursorLock()
 	UIS.MouseBehavior = Enum.MouseBehavior.LockCenter
 end
 local function UnLockCursor()
-	HoldingQ = false Active = false Lock = false 
+	HoldingE = false Active = false Lock = false 
 	UIS.MouseBehavior = Enum.MouseBehavior.Default
 end
 function FindNearestPlayer()
@@ -64,12 +64,12 @@ end
 
 UIS.InputBegan:Connect(function(Input)
 	if Input.KeyCode == Enum.KeyCode.Q then
-		HoldingQ = true
+		HoldingE = true
 		Active = true
 		Lock = true
 		if Active then
         	local The_Enemy = FindNearestPlayer()
-			while HoldingQ do task.wait(.000001)
+			while HoldingE do task.wait(.000001)
 				if Lock and The_Enemy ~= nil then
 					local Future = The_Enemy.HumanoidRootPart.CFrame + (The_Enemy.HumanoidRootPart.Velocity * Epitaph + HeadOffset)
 					MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
